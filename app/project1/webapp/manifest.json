@@ -108,6 +108,21 @@
           "pattern": "Categories({key})/products({key2}):?query:",
           "name": "CategoriesProductsObjectPage",
           "target": "CategoriesProductsObjectPage"
+        },
+                {
+          "pattern": "Suppliers:?query:",
+          "name": "SuppliersList",
+          "target": "SuppliersList"
+        },
+        {
+          "pattern": "Suppliers({key}):?query:",
+          "name": "SuppliersObjectPage",
+          "target": "SuppliersObjectPage"
+        },
+        {
+          "pattern": "Suppliers({key})/products({key2}):?query:",
+          "name": "SuppliersProductsObjectPage",
+          "target": "SuppliersProductsObjectPage"
         }
       ],
 
@@ -137,8 +152,14 @@
                       "press": "project1.ext.controller.Navigation.toCategories",
                       "text": "Categories",
                       "requiresSelection": false
+                    },
+                    "toSuppliers": {
+                      "press": "project1.ext.controller.Navigation.toSuppliers",
+                      "text": "Suppliers",
+                      "requiresSelection": false
                     }
                   }
+
                 }
               }
             }
@@ -200,7 +221,54 @@
               "editableHeaderContent": false,
               "contextPath": "/Categories/products"
             }
+          },
+                  "SuppliersList": {
+          "type": "Component",
+          "id": "SuppliersList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Suppliers",
+              "initialLoad": "Enabled",
+              "navigation": {
+                "Suppliers": {
+                  "detail": {
+                    "route": "SuppliersObjectPage"
+                  }
+                }
+              }
+            }
           }
+        },
+        "SuppliersObjectPage": {
+          "type": "Component",
+          "id": "SuppliersObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Suppliers",
+              "navigation": {
+                "products": {
+                  "detail": {
+                    "route": "SuppliersProductsObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "SuppliersProductsObjectPage": {
+          "type": "Component",
+          "id": "SuppliersProductsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Suppliers/products"
+            }
+          }
+        }
         }
       }
     }

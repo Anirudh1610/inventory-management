@@ -4,6 +4,10 @@ sap.ui.define([], function () {
     return {
         toCategories: function () {
             this.routing.navigateToRoute("CategoriesList");
+        },
+        toSuppliers: function () {
+            this.routing.navigateToRoute("SuppliersList");
         }
+        
     };
 });

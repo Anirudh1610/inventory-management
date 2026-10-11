@@ -80,3 +80,41 @@ annotate InventoryService.Categories with @(
     }
   ]
 );
+
+annotate InventoryService.Suppliers with @(
+  UI.HeaderInfo: {
+    TypeName: 'Supplier',
+    TypeNamePlural: 'Suppliers',
+    Title: { Value: name },
+    Description: { Value: country }
+  },
+  UI.LineItem: [
+    { Value: name,    Label: 'Supplier' },
+    { Value: contact, Label: 'Contact' },
+    { Value: city,    Label: 'City' },
+    { Value: country, Label: 'Country' }
+  ],
+  UI.SelectionFields: [ country ],
+  UI.FieldGroup #Contact: {
+    Data: [
+      { Value: contact, Label: 'Contact Person' },
+      { Value: phone,   Label: 'Phone' },
+      { Value: city,    Label: 'City' },
+      { Value: country, Label: 'Country' }
+    ]
+  },
+  UI.Facets: [
+    {
+      $Type : 'UI.ReferenceFacet',
+      ID    : 'Contact',
+      Label : 'Contact Details',
+      Target: '@UI.FieldGroup#Contact'
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
+      ID    : 'Products',
+      Label : 'Products Supplied',
+      Target: 'products/@UI.LineItem'
+    }
+  ]
+);
