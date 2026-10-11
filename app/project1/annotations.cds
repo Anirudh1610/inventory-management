@@ -48,3 +48,35 @@ annotate service.Products with {
     }
 };
 
+annotate InventoryService.Categories with @(
+  UI.LineItem: [
+{ Value: name, Label: 'Category' }
+  ],
+  UI.HeaderInfo: {
+    TypeName: 'Category',
+    TypeNamePlural: 'Categories',
+    Title: { Value: name }
+  }
+);
+
+annotate InventoryService.Categories with @(
+  UI.FieldGroup #General: {
+    Data: [
+      { Value: name, Label: 'Name' }
+    ]
+  },
+  UI.Facets: [
+    {
+      $Type : 'UI.ReferenceFacet',
+      ID    : 'General',
+      Label : 'General Information',
+      Target: '@UI.FieldGroup#General'
+    },
+    {
+      $Type : 'UI.ReferenceFacet',
+      ID    : 'Products',
+      Label : 'Products',
+      Target: 'products/@UI.LineItem'
+    }
+  ]
+);

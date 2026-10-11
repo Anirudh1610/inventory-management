@@ -83,6 +83,7 @@
     "routing": {
       "config": {},
       "routes": [
+
         {
           "pattern": ":?query:",
           "name": "ProductsList",
@@ -92,8 +93,24 @@
           "pattern": "Products({key}):?query:",
           "name": "ProductsObjectPage",
           "target": "ProductsObjectPage"
+        },
+        {
+          "pattern": "Categories:?query:",
+          "name": "CategoriesList",
+          "target": "CategoriesList"
+        },
+        {
+          "pattern": "Categories({key}):?query:",
+          "name": "CategoriesObjectPage",
+          "target": "CategoriesObjectPage"
+        },
+        {
+          "pattern": "Categories({key})/products({key2}):?query:",
+          "name": "CategoriesProductsObjectPage",
+          "target": "CategoriesProductsObjectPage"
         }
       ],
+
       "targets": {
         "ProductsList": {
           "type": "Component",
@@ -114,6 +131,13 @@
                 "@com.sap.vocabularies.UI.v1.LineItem": {
                   "tableSettings": {
                     "type": "ResponsiveTable"
+                  },
+                  "actions": {
+                    "toCategories": {
+                      "press": "project1.ext.controller.Navigation.toCategories",
+                      "text": "Categories",
+                      "requiresSelection": false
+                    }
                   }
                 }
               }
@@ -128,6 +152,53 @@
             "settings": {
               "editableHeaderContent": false,
               "contextPath": "/Products"
+            }
+          }
+        },
+        "CategoriesList": {
+          "type": "Component",
+          "id": "CategoriesList",
+          "name": "sap.fe.templates.ListReport",
+          "options": {
+            "settings": {
+              "contextPath": "/Categories",
+              "initialLoad": "Enabled",
+              "navigation": {
+                "Categories": {
+                  "detail": {
+                    "route": "CategoriesObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+                "CategoriesObjectPage": {
+          "type": "Component",
+          "id": "CategoriesObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Categories",
+              "navigation": {
+                "products": {
+                  "detail": {
+                    "route": "CategoriesProductsObjectPage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "CategoriesProductsObjectPage": {
+          "type": "Component",
+          "id": "CategoriesProductsObjectPage",
+          "name": "sap.fe.templates.ObjectPage",
+          "options": {
+            "settings": {
+              "editableHeaderContent": false,
+              "contextPath": "/Categories/products"
             }
           }
         }
